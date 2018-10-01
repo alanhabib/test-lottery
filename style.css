@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+}
+
+#bridge {
+  display: block;
+  margin: 0 auto;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/f/f8/Heiligengrabe%2C_Kloster_Stift_zum_Heiligengrabe%2C_Abtei%2C_Fenster_im_Dormitorium_--_2017_--_9972.jpg");
+  background-image: -webkit-image-set(
+    url("https://upload.wikimedia.org/wikipedia/commons/f/f8/Heiligengrabe%2C_Kloster_Stift_zum_Heiligengrabe%2C_Abtei%2C_Fenster_im_Dormitorium_--_2017_--_9972.jpg")
+  );
+  background-size: cover;
+  width: 100%;
+  max-width: 750px;
+  height: auto;
+  cursor: crosshair;
+  cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/circular-cursor.png)
+      53 53,
+    crosshair;
+}
+#bridgeContainer {
+  text-align: center;
+  font-family: Avenir, sans-serif;
+}
+#bridgeContainer figcaption {
+  margin-top: 2rem;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lottery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        p.dice {
+            display: inline-block;
+            width: 32px;
+            background: #f5f5f5;
+            border: #999 solid 1px;
+            font-size: 24px;
+            text-align: center;
+            margin: 5px;
+            border-radius: 15px;
+
+        }
+
+        .wrapper {
+            display: flex;
+            width: 140px;
+            flex-wrap: wrap;
+            border: #999 solid 1px;
+            background: #eb94d0;
+            background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -moz-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -o-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: linear-gradient(to bottom, #eb94d0, #2079b0);
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 15px;
+        }
+
+        .btn {
+            background: #eb94d0;
+            background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -moz-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -o-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: linear-gradient(to bottom, #eb94d0, #2079b0);
+            -webkit-border-radius: 28;
+            -moz-border-radius: 28;
+            border-radius: 15px;
+            /* text-shadow: 3px 2px 1px #9daef5; */
+            /* -webkit-box-shadow: 6px 5px 24px #666666;
+            -moz-box-shadow: 6px 5px 14px #666666;
+            box-shadow: 6px 5px 24px #666666; */
+            font-family: Lato;
+            color: #fafafa;
+            font-size: 14px;
+            padding: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #2079b0;
+            background-image: -webkit-linear-gradient(top, #2079b0, #eb94d0);
+            background-image: -moz-linear-gradient(top, #2079b0, #eb94d0);
+            background-image: -ms-linear-gradient(top, #2079b0, #eb94d0);
+            background-image: -o-linear-gradient(top, #2079b0, #eb94d0);
+            background-image: linear-gradient(to bottom, #2079b0, #eb94d0);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="row">
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+        </div>
+        <div class="row">
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+        </div>
+        <div class="row">
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+            <p class="dice">0</p>
+        </div>
+    </div>
+    <button class="btn" onclick="rollDice()">Buy ticket</button>
+    <h2 id="status" style="clear:left;"></h2>
+
+    <script>
+        function rollDice() {
+            let status = document.getElementById("status");
+            let diceArrayDOM = document.getElementsByClassName("dice");
+            let dieResult = [];
+            for (let i = 0; i < 9; i++) {
+                dieResult.push(rollDie());
+            }
+            let diceTotal = dieResult.reduce((accu, item) => { return accu + item })
+            for (let i = 0; i < diceArrayDOM.length; i++) {
+                diceArrayDOM[i].innerHTML = dieResult[i]
+            }
+            status.innerHTML = "You rolled " + diceTotal;
+
+            if (checkForWin(dieResult)) {
+                status.innerHTML += " You win!";
+            } else {
+                status.innerHTML += " You lose!";
+            }
+
+        }
+
+        function checkForWin(rollDice) {
+            let win = false;
+            rollDice = rollDice.reduce((accu, item) => {
+                if (accu[item]) {
+                    accu[item] = accu[item] + 1;
+                } else {
+                    accu[item] = 1;
+                }
+                return accu;
+            }, {})
+
+            Object.keys(rollDice).forEach((item) => {
+                if (rollDice[item] > 2) {
+                    win = true;
+                }
+            })
+            if (win) {
+                return true;
+            }
+            return false;
+        }
+
+        function rollDie() {
+            return Math.floor(Math.random() * 9) + 1;
+        }
+
+
+    </script>
+</body>
+
+</html>
